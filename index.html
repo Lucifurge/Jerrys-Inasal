@@ -292,6 +292,38 @@
 
   </div>
 </section>
+<!-- ORDER SECTION -->
+<section class="py-5 bg-white" id="order">
+  <div class="container">
+    <h2 class="text-center text-success mb-4">Place Your Order</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form id="orderForm" class="border rounded p-4 shadow-sm bg-light">
+          <div class="mb-3">
+            <label class="form-label">Dish Name</label>
+            <input type="text" name="dish" class="form-control" placeholder="e.g., Lechon Kawali" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Your Location</label>
+            <input type="text" name="location" class="form-control" placeholder="e.g., Brgy. San Pedro, QC" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" name="date" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Time</label>
+            <input type="time" name="time" class="form-control" required>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-inasal-green px-5 py-2">Submit Order</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <!-- OWNER SECTION -->
   <section id="testimonials" class="py-5 text-center bg-light" data-aos="fade-up">
@@ -340,5 +372,29 @@
     });
     </script>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+  const supabase = supabase.createClient('https://YOUR_PROJECT.supabase.co', 'YOUR_PUBLIC_ANON_KEY');
+
+  const form = document.getElementById('orderForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const order = {
+      dish: data.get('dish'),
+      location: data.get('location'),
+      date: data.get('date'),
+      time: data.get('time'),
+    };
+    const { error } = await supabase.from('orders').insert([order]);
+    if (!error) {
+      alert("Order submitted! We'll reach out soon.");
+      form.reset();
+    } else {
+      alert("Error submitting order. Try again.");
+      console.error(error);
+    }
+  });
+</script>
     </body>
     </html>
