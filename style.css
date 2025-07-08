@@ -180,7 +180,8 @@ form input:focus, form textarea:focus {
 }
 
 /* Responsive Fixes */
-@media (max-width: 768px) {
+@media (max-width: 768px) 
+{
   .navbar-brand {
     font-size: 1.2rem;
   }
@@ -191,40 +192,20 @@ form input:focus, form textarea:focus {
   #hero::before {
     background-size: 150px;
   }
-}
-.facebook-float {
-  position: fixed;
-  bottom: 80px; /* Adjust as needed */
-  right: 20px;
-  background-color: #3b5998;
-  color: white;
-  padding: 15px;
-  border-radius: 50%;
-  z-index: 1000;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-.facebook-float:hover {
-  background-color: #2d4373;
-  color: #fff;
+.neon-border-green {
+  color: inherit; /* Keep existing text color */
+  text-shadow:
+    0 0 2px #39ff14,
+    0 0 4px #39ff14,
+    0 0 6px #39ff14;
 }
 
-  .neon-text-green {
-    color: #39ff14;
-    text-shadow:
-      0 0 5px #39ff14,
-      0 0 10px #39ff14,
-      0 0 20px #39ff14,
-      0 0 40px #39ff14;
-  }
-
-  .neon-text-white {
-    color: #fff;
-    text-shadow:
-      0 0 5px #fff,
-      0 0 10px #fff,
-      0 0 15px #0ff,
-      0 0 20px #0ff;
-  }
+.neon-border-white {
+  color: inherit; /* Keep text white */
+  text-shadow:
+    0 0 2px #fff,
+    0 0 4px #0ff,
+    0 0 6px #0ff;
+}
 
 </style>
