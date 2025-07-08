@@ -179,19 +179,6 @@ form input:focus, form textarea:focus {
   opacity: 1;
 }
 
-/* Responsive Fixes */
-@media (max-width: 768px) 
-{
-  .navbar-brand {
-    font-size: 1.2rem;
-  }
-  .testimonial-img {
-    width: 60px;
-    height: 60px;
-  }
-  #hero::before {
-    background-size: 150px;
-  }
 .neon-border-green {
   color: inherit; /* Keep existing text color */
   text-shadow:
@@ -208,4 +195,17 @@ form input:focus, form textarea:focus {
     0 0 6px #0ff;
 }
 
-</style>
+/* Responsive Fixes */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+  .testimonial-img {
+    width: 60px;
+    height: 60px;
+  }
+  #hero::before {
+    background-size: 150px;
+  }
+}
+
