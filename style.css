@@ -274,4 +274,13 @@ form input:focus, form textarea:focus {
   background-color: #1b5e20;
   color: #fff;
 }
+.btn-inasal-green {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+}
+.btn-inasal-green:hover {
+  background-color: #27632a;
+  color: white;
+}
 
