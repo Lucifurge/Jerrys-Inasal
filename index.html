@@ -296,6 +296,10 @@
 <section class="py-5 bg-white" id="order">
   <div class="container">
     <h2 class="text-center text-success mb-4">Place Your Order</h2>
+
+    <!-- Feedback Alert -->
+    <div id="order-alert" class="alert d-none text-center" role="alert"></div>
+
     <div class="row justify-content-center">
       <div class="col-md-8">
         <form id="orderForm" class="border rounded p-4 shadow-sm bg-light">
@@ -372,29 +376,47 @@
     });
     </script>
     <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
-  const supabase = supabase.createClient('https://YOUR_PROJECT.supabase.co', 'YOUR_PUBLIC_ANON_KEY');
+  // Initialize Supabase
+  const { createClient } = supabase;
+  const supabaseClient = createClient(
+    'https://YOUR_PROJECT_ID.supabase.co',
+    'YOUR_PUBLIC_ANON_KEY'
+  );
 
+  // Handle form submission
   const form = document.getElementById('orderForm');
+  const alertBox = document.getElementById('order-alert');
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
     const data = new FormData(form);
     const order = {
-      dish: data.get('dish'),
-      location: data.get('location'),
+      dish: data.get('dish').trim(),
+      location: data.get('location').trim(),
       date: data.get('date'),
       time: data.get('time'),
+      status: 'pending', // optional for admin filtering
+      created_at: new Date().toISOString() // add timestamp
     };
-    const { error } = await supabase.from('orders').insert([order]);
+
+    const { error } = await supabaseClient.from('orders').insert([order]);
+
     if (!error) {
-      alert("Order submitted! We'll reach out soon.");
+      alertBox.className = 'alert alert-success text-center';
+      alertBox.textContent = "✅ Order submitted successfully!";
+      alertBox.classList.remove('d-none');
       form.reset();
     } else {
-      alert("Error submitting order. Try again.");
+      alertBox.className = 'alert alert-danger text-center';
+      alertBox.textContent = "❌ Failed to submit order. Try again.";
+      alertBox.classList.remove('d-none');
       console.error(error);
     }
   });
 </script>
+
     </body>
     </html>
