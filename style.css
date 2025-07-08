@@ -22,7 +22,7 @@ a:hover {
 
 /* Branding Colors */
 .text-inasal-green {
-  color: #2e7d32;
+  color: #ffffff;
 }
 .bg-inasal-green {
   background-color: #2e7d32;
@@ -208,4 +208,23 @@ form input:focus, form textarea:focus {
   background-color: #2d4373;
   color: #fff;
 }
+
+  .neon-text-green {
+    color: #39ff14;
+    text-shadow:
+      0 0 5px #39ff14,
+      0 0 10px #39ff14,
+      0 0 20px #39ff14,
+      0 0 40px #39ff14;
+  }
+
+  .neon-text-white {
+    color: #fff;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #0ff,
+      0 0 20px #0ff;
+  }
+
 </style>
