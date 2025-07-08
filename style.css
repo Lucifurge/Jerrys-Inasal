@@ -192,3 +192,20 @@ form input:focus, form textarea:focus {
     background-size: 150px;
   }
 }
+.facebook-float {
+  position: fixed;
+  bottom: 80px; /* Adjust as needed */
+  right: 20px;
+  background-color: #3b5998;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  z-index: 1000;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+.facebook-float:hover {
+  background-color: #2d4373;
+  color: #fff;
+}
+</style>
