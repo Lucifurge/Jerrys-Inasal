@@ -312,6 +312,10 @@
             <input type="text" name="location" class="form-control" placeholder="e.g., Brgy. San Pedro, QC" required>
           </div>
           <div class="mb-3">
+            <label class="form-label">Contact Number</label>
+            <input type="tel" name="contact" class="form-control" placeholder="e.g., 09123456789" required>
+          </div>
+          <div class="mb-3">
             <label class="form-label">Date</label>
             <input type="date" name="date" class="form-control" required>
           </div>
@@ -327,6 +331,7 @@
     </div>
   </div>
 </section>
+
 
 
   <!-- OWNER SECTION -->
@@ -376,42 +381,35 @@
     });
     </script>
     <script src="script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
-  // Initialize Supabase
-  const { createClient } = supabase;
-  const supabaseClient = createClient(
-    'https://YOUR_PROJECT_ID.supabase.co',
-    'YOUR_PUBLIC_ANON_KEY'
-  );
+  const supabase = supabase.createClient('https://YOUR_PROJECT.supabase.co', 'YOUR_PUBLIC_ANON_KEY');
 
-  // Handle form submission
   const form = document.getElementById('orderForm');
   const alertBox = document.getElementById('order-alert');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const data = new FormData(form);
+
     const order = {
-      dish: data.get('dish').trim(),
-      location: data.get('location').trim(),
+      dish: data.get('dish'),
+      location: data.get('location'),
+      contact: data.get('contact'),
       date: data.get('date'),
       time: data.get('time'),
-      status: 'pending', // optional for admin filtering
-      created_at: new Date().toISOString() // add timestamp
+      status: 'Pending'
     };
 
-    const { error } = await supabaseClient.from('orders').insert([order]);
+    const { error } = await supabase.from('orders').insert([order]);
 
     if (!error) {
       alertBox.className = 'alert alert-success text-center';
-      alertBox.textContent = "✅ Order submitted successfully!";
+      alertBox.textContent = "Order submitted successfully! We'll contact you soon.";
       alertBox.classList.remove('d-none');
       form.reset();
     } else {
       alertBox.className = 'alert alert-danger text-center';
-      alertBox.textContent = "❌ Failed to submit order. Try again.";
+      alertBox.textContent = "Failed to submit order. Please try again.";
       alertBox.classList.remove('d-none');
       console.error(error);
     }
