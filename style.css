@@ -264,4 +264,14 @@ form input:focus, form textarea:focus {
       0 0 20px #39ff14;
   }
 }
+.btn-inasal-green {
+  background-color: #2e7d32;
+  color: #fff;
+  border: none;
+}
+
+.btn-inasal-green:hover {
+  background-color: #1b5e20;
+  color: #fff;
+}
 
