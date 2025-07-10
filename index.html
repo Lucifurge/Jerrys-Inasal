@@ -466,6 +466,25 @@
     </script>
     <script src="script.js"></script>
 <script>
+  document.querySelectorAll('.menu-card').forEach(card => {
+    card.style.cursor = 'pointer';
+
+    card.addEventListener('click', () => {
+      const clickedDish = card.textContent.trim().split('₱')[0].trim();
+      const textarea = document.querySelector('textarea[name="dishes"]');
+      let currentDishes = textarea.value.split(',').map(d => d.trim()).filter(d => d);
+
+      // Avoid duplicates
+      if (!currentDishes.includes(clickedDish)) {
+        currentDishes.push(clickedDish);
+        textarea.value = currentDishes.join(', ');
+      }
+
+      // Scroll to order section
+      document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
   const form = document.getElementById('orderForm');
   const alertBox = document.getElementById('order-alert');
 
@@ -474,7 +493,7 @@
 
     const formData = new FormData(form);
     const orderData = {
-      dish: formData.get('dish'),
+      dishes: formData.get('dishes'),
       location: formData.get('location'),
       contact: formData.get('contact'),
       date: formData.get('date'),
@@ -506,6 +525,7 @@
     }
   });
 </script>
+
 
 
 
