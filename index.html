@@ -384,13 +384,14 @@
     <!-- Feedback Alert -->
     <div id="order-alert" class="alert d-none text-center" role="alert"></div>
 
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <form id="orderForm" class="border rounded p-4 shadow-sm bg-light">
-          <div class="mb-3">
-            <label class="form-label">Dish Name</label>
-            <input type="text" name="dish" class="form-control" placeholder="e.g., Lechon Kawali" required>
-          </div>
+   <div class="mb-3">
+  <label class="form-label">Selected Dishes</label>
+  <div id="selectedDishesDisplay" class="p-2 border rounded bg-white mb-2 text-dark" style="min-height: 40px;">
+    <!-- Selected dishes will appear here -->
+  </div>
+  <input type="hidden" name="dish" id="selectedDishesInput" required>
+</div>
+
           <div class="mb-3">
             <label class="form-label">Your Location</label>
             <input type="text" name="location" class="form-control" placeholder="e.g., Brgy. San Pedro, QC" required>
@@ -466,34 +467,37 @@
     </script>
     <script src="script.js"></script>
 <script>
+  const selectedDishes = [];
+  const selectedDishesInput = document.getElementById('selectedDishesInput');
+  const selectedDishesDisplay = document.getElementById('selectedDishesDisplay');
+  const alertBox = document.getElementById('order-alert');
+  const form = document.getElementById('orderForm');
+
   document.querySelectorAll('.menu-card').forEach(card => {
     card.style.cursor = 'pointer';
 
     card.addEventListener('click', () => {
-      const clickedDish = card.textContent.trim().split('₱')[0].trim();
-      const textarea = document.querySelector('textarea[name="dishes"]');
-      let currentDishes = textarea.value.split(',').map(d => d.trim()).filter(d => d);
+      const dish = card.textContent.trim().replace(/\s+₱\d+(\.\d+)?$/, '');
 
-      // Avoid duplicates
-      if (!currentDishes.includes(clickedDish)) {
-        currentDishes.push(clickedDish);
-        textarea.value = currentDishes.join(', ');
+      if (selectedDishes.includes(dish)) {
+        selectedDishes.splice(selectedDishes.indexOf(dish), 1);
+        card.classList.remove('bg-success', 'text-white');
+      } else {
+        selectedDishes.push(dish);
+        card.classList.add('bg-success', 'text-white');
       }
 
-      // Scroll to order section
-      document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+      selectedDishesInput.value = selectedDishes.join(', ');
+      selectedDishesDisplay.textContent = selectedDishes.join(', ');
     });
   });
-
-  const form = document.getElementById('orderForm');
-  const alertBox = document.getElementById('order-alert');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const formData = new FormData(form);
     const orderData = {
-      dishes: formData.get('dishes'),
+      dishes: formData.get('dish'), // matches input name="dish"
       location: formData.get('location'),
       contact: formData.get('contact'),
       date: formData.get('date'),
@@ -510,7 +514,7 @@
       const result = await response.json();
 
       if (result.url) {
-        window.location.href = result.url; // ✅ Redirect to PayMongo Checkout
+        window.location.href = result.url;
       } else {
         alertBox.textContent = 'Something went wrong.';
         alertBox.classList.remove('d-none');
@@ -525,25 +529,7 @@
     }
   });
 </script>
-<script>
-  const selectedDishes = new Set();
 
-  document.querySelectorAll('.menu-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const dishName = card.innerText.replace(/\s*₱20.00\s*/, ''); // remove price
 
-      if (selectedDishes.has(dishName)) {
-        selectedDishes.delete(dishName);
-        card.classList.remove('selected');
-      } else {
-        selectedDishes.add(dishName);
-        card.classList.add('selected');
-      }
-
-      // Optional: update hidden input
-      document.getElementById('dishesInput').value = [...selectedDishes].join(', ');
-    });
-  });
-</script>
    </body>
     </html>
