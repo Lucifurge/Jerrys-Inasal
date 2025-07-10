@@ -301,3 +301,22 @@ form textarea:focus {
     text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
   }
 }
+.menu-card {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+  border-radius: 8px;
+}
+
+.menu-card:hover {
+  background-color: #f9f9f9;
+}
+
+.menu-card.selected {
+  background-color: #d1e7dd; /* light green */
+  border-color: #0f5132;
+  color: #0f5132;
+  font-weight: bold;
+}
+
