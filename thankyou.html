@@ -50,37 +50,38 @@
   </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const sessionId = params.get('checkout_session_id');
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('checkout_session_id'); // This matches your success_url key
 
-    const messageEl = document.getElementById('message');
-    const loaderEl = document.getElementById('loader');
-    const backBtn = document.getElementById('backBtn');
+  const messageEl = document.getElementById('message');
+  const loaderEl = document.getElementById('loader');
+  const backBtn = document.getElementById('backBtn');
 
-    if (sessionId) {
-      fetch(`https://jerry-inasal.onrender.com/verify-payment?sessionId=${sessionId}`)
-        .then(response => response.json())
-        .then(data => {
-          console.log('✅ Payment verification result:', data);
-          if (data.status === 'paid') {
-            messageEl.textContent = "Your order has been successfully paid and confirmed!";
-          } else {
-            messageEl.textContent = "Your payment is not yet complete. If you've paid, please contact us.";
-          }
-        })
-        .catch(err => {
-          console.error('❌ Verification error:', err);
-          messageEl.textContent = "An error occurred while verifying your payment. Please try again later.";
-        })
-        .finally(() => {
-          loaderEl.style.display = 'none';
-          backBtn.style.display = 'inline-block';
-        });
-    } else {
-      messageEl.textContent = "No session ID found in the URL. Please return to the homepage.";
-      loaderEl.style.display = 'none';
-      backBtn.style.display = 'inline-block';
-    }
-  </script>
+  if (sessionId) {
+    fetch(`https://jerry-inasal.onrender.com/verify-payment?sessionId=${sessionId}`)
+      .then(resp => resp.json())
+      .then(data => {
+        console.log('✅ Payment verification result:', data);
+        if (data.status === 'paid') {
+          messageEl.textContent = "Payment confirmed! 🎉";
+        } else {
+          messageEl.textContent = "Payment not completed yet. Contact support if needed.";
+        }
+      })
+      .catch(err => {
+        console.error('❌ Verification error:', err);
+        messageEl.textContent = "Error verifying payment. Please try again later.";
+      })
+      .finally(() => {
+        loaderEl.style.display = 'none';
+        backBtn.style.display = 'inline-block';
+      });
+  } else {
+    messageEl.textContent = "No session ID found in URL.";
+    loaderEl.style.display = 'none';
+    backBtn.style.display = 'inline-block';
+  }
+</script>
+
 </body>
 </html>
