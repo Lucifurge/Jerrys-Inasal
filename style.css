@@ -282,5 +282,47 @@ form input:focus, form textarea:focus {
 .btn-inasal-green:hover {
   background-color: #27632a;
   color: white;
+  <style>
+  .menu-card {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+
+  .menu-card:hover {
+    background-color: #f0fff4;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+  }
+
+  .menu-section h4 {
+    font-weight: bold;
+    border-bottom: 2px solid #198754;
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 25px;
+  }
+
+  .menu-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #198754;
+    margin-bottom: 40px;
+  }
+
+  .section-separator {
+    height: 3px;
+    background: #198754;
+    width: 80px;
+    margin: 0 auto 40px;
+    border-radius: 50px;
+  }
+
+
 }
 
