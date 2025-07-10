@@ -283,14 +283,18 @@ form input:focus, form textarea:focus {
   background-color: #27632a;
   color: white;
   <style>
+<style>
   .menu-card {
     background-color: #ffffff;
     border: 1px solid #dee2e6;
     padding: 15px;
     border-radius: 8px;
-    text-align: center;
+    text-align: left;
     font-weight: 500;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     transition: all 0.3s ease;
   }
 
@@ -300,12 +304,10 @@ form input:focus, form textarea:focus {
     box-shadow: 0 8px 15px rgba(0,0,0,0.1);
   }
 
-  .menu-section h4 {
+  .menu-price {
+    color: #198754;
     font-weight: bold;
-    border-bottom: 2px solid #198754;
-    display: inline-block;
-    padding-bottom: 5px;
-    margin-bottom: 25px;
+    white-space: nowrap;
   }
 
   .menu-title {
@@ -322,7 +324,6 @@ form input:focus, form textarea:focus {
     margin: 0 auto 40px;
     border-radius: 50px;
   }
+</style>
 
-
-}
 
