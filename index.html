@@ -200,95 +200,48 @@
   <div class="container">
     <h2 class="text-center text-success mb-5">Featured Dishes</h2>
 
-    <!-- Initial 3 Dishes -->
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card text-center">
-          <img src="kawali.jpg" class="card-img-top" alt="Lechon Kawali">
-          <div class="card-body">
-            <h5 class="card-title mb-0">Lechon Kawali</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card text-center">
-          <img src="sinigang.jpg" class="card-img-top" alt="Sinigang na Baboy">
-          <div class="card-body">
-            <h5 class="card-title mb-0">Sinigang na Baboy</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card text-center">
-          <img src="bangus.jpg" class="card-img-top" alt="Grilled Bangus">
-          <div class="card-body">
-            <h5 class="card-title mb-0">Grilled Bangus</h5>
-          </div>
-        </div>
-      </div>
+  <section class="py-5 bg-white" id="menu">
+  <div class="container">
+    <h2 class="text-success text-center mb-5">Our Menu</h2>
+
+    <!-- MAIN DISHES -->
+    <h4 class="text-center text-dark mb-3">Choices of Main Dish</h4>
+    <div class="row g-3 mb-5">
+      ${[
+        "Beef Afritada", "Beef Kaldereta", "Beef Steak", "Beef w/ Broccoli", "Beef w/ Mushroom", "Beef Mechado",
+        "Chicken Afritada", "Fried Chicken", "Buttered Chicken", "Garlic Chicken", "Chicken Adobo", "Chicken Curry",
+        "Chicken Cordon Bleu", "Chicken Teriyaki", "Chicken Nuggets", "Sweet and Sour Chicken",
+        "Pork Afritada", "Pork Bola-bola", "Pork Menudo", "Pork Steak", "Pork Adobo", "Pork Humba", "Pork Hamonado", "Sweet and Sour Pork",
+        "Fish Fillet w/ Sweet & Sour Sauce (Tuna)", "Fish w/ Escabeche Sauce (Tuna)", "Fish w/ Lemon Sauce", "Kinilaw na Tuna"
+      ].map(dish => `
+        <div class="col-md-4"><div class="border p-2 rounded bg-light">${dish}</div></div>
+      `).join('')}
     </div>
 
-  <!-- View More Button -->
-<div class="text-center mt-4">
-  <button class="btn btn-inasal-green px-4 py-2" data-bs-toggle="collapse" data-bs-target="#moreMenu">
-    View More Menu
-  </button>
-</div>
-
-    <!-- More Dishes (hidden initially) -->
-    <div class="collapse mt-4" id="moreMenu">
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card text-center">
-            <img src="bbq.jpg" class="card-img-top" alt="Chicken BBQ">
-            <div class="card-body">
-              <h5 class="card-title mb-0">Chicken BBQ</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card text-center">
-            <img src="sisig.jpg" class="card-img-top" alt="Pork Sisig">
-            <div class="card-body">
-              <h5 class="card-title mb-0">Pork Sisig</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card text-center">
-            <img src="pancit.jpg" class="card-img-top" alt="Pancit Bihon">
-            <div class="card-body">
-              <h5 class="card-title mb-0">Pancit Bihon</h5>
-            </div>
-          </div>
-        </div>
-        <!-- Add more as needed -->
-        <div class="col-md-4">
-          <div class="card text-center">
-            <img src="adobo.jpg" class="card-img-top" alt="Chicken Adobo">
-            <div class="card-body">
-              <h5 class="card-title mb-0">Chicken Adobo</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card text-center">
-            <img src="laing.jpg" class="card-img-top" alt="Laing">
-            <div class="card-body">
-              <h5 class="card-title mb-0">Laing</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card text-center">
-            <img src="turon.jpg" class="card-img-top" alt="Turon">
-            <div class="card-body">
-              <h5 class="card-title mb-0">Turon</h5>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- SIDE DISHES -->
+    <h4 class="text-center text-dark mb-3">Choices of Side Dish</h4>
+    <div class="row g-3 mb-5">
+      ${[
+        "Four Season", "Bihon Guisado", "Pancit Special", "Mixed Veggies", "Pinakbet", "Ampalaya con Carne", "Bam-e",
+        "Lumpiang Shanghai", "Spaghetti", "Sotanghon Guisado", "Sauteed Beans", "Onion Rings", "Buttered Corn",
+        "Buttered Mixed", "Buttered Mixed Vegetables"
+      ].map(dish => `
+        <div class="col-md-4"><div class="border p-2 rounded bg-light">${dish}</div></div>
+      `).join('')}
     </div>
+
+    <!-- DESSERTS -->
+    <h4 class="text-center text-dark mb-3">Choices of Desserts</h4>
+    <div class="row g-3">
+      ${[
+        "Buko Pandan", "Macaroni Salad", "Tapioca w/ Mango", "Fresh Fruits", "Buko Salad"
+      ].map(dish => `
+        <div class="col-md-4"><div class="border p-2 rounded bg-light">${dish}</div></div>
+      `).join('')}
+    </div>
+  </div>
+</section>
+
 
   </div>
 </section>
