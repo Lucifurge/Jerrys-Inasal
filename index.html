@@ -398,7 +398,6 @@
     };
 
     try {
-      // 🔁 Send to your backend (you'll build this endpoint)
       const response = await fetch('https://jerry-inasal.onrender.com/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -407,8 +406,8 @@
 
       const result = await response.json();
 
-      if (result.checkout_url) {
-        window.location.href = result.checkout_url; // 🔁 Redirect to PayMongo
+      if (result.url) {
+        window.location.href = result.url; // ✅ Redirect to PayMongo Checkout
       } else {
         alertBox.textContent = 'Something went wrong.';
         alertBox.classList.remove('d-none');
@@ -423,6 +422,7 @@
     }
   });
 </script>
+
 
 
     </body>
