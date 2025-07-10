@@ -369,53 +369,65 @@
       </div>
     </div>
   </section>
-
-
-
-
-
     </div>
   </section>
-  <!-- ORDER SECTION -->
-  <section class="py-5 bg-white" id="order">
-    <div class="container">
-      <h2 class="text-center text-success mb-4">Place Your Order</h2>
+ <!-- ORDER SECTION -->
+<section class="py-5 bg-white" id="order">
+  <div class="container">
+    <h2 class="text-center text-success mb-4">Place Your Order</h2>
 
-      <!-- Feedback Alert -->
-      <div id="order-alert" class="alert d-none text-center" role="alert"></div>
+    <!-- Feedback Alert -->
+    <div id="order-alert" class="alert d-none text-center" role="alert"></div>
 
-    <div class="mb-3">
-    <label class="form-label">Selected Dishes</label>
-    <div id="selectedDishesDisplay" class="p-2 border rounded bg-white mb-2 text-dark" style="min-height: 40px;">
-      <!-- Selected dishes will appear here -->
-    </div>
-    <input type="hidden" name="dish" id="selectedDishesInput" required>
-  </div>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <!-- ✅ OPENING FORM TAG (MISSING BEFORE) -->
+        <form id="orderForm" class="border rounded p-4 shadow-sm bg-light">
+        
+          <!-- Selected Dishes -->
+          <div class="mb-3">
+            <label class="form-label">Selected Dishes</label>
+            <div id="selectedDishesDisplay" class="p-2 border rounded bg-white mb-2 text-dark" style="min-height: 40px;">
+              <!-- Selected dishes will appear here -->
+            </div>
+            <!-- ✅ Hidden input that your JS script updates -->
+            <input type="hidden" name="dish" id="selectedDishesInput" required>
+          </div>
 
-            <div class="mb-3">
-              <label class="form-label">Your Location</label>
-              <input type="text" name="location" class="form-control" placeholder="e.g., Brgy. San Pedro, QC" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Contact Number</label>
-              <input type="tel" name="contact" class="form-control" placeholder="e.g., 09123456789" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Date</label>
-              <input type="date" name="date" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Time</label>
-              <input type="time" name="time" class="form-control" required>
-            </div>
-            <div class="text-center">
-              <button type="submit" class="btn btn-inasal-green px-5 py-2">Submit Order</button>
-            </div>
-          </form>
-        </div>
+          <!-- Location -->
+          <div class="mb-3">
+            <label class="form-label">Your Location</label>
+            <input type="text" name="location" class="form-control" placeholder="e.g., Brgy. San Pedro, QC" required>
+          </div>
+
+          <!-- Contact -->
+          <div class="mb-3">
+            <label class="form-label">Contact Number</label>
+            <input type="tel" name="contact" class="form-control" placeholder="e.g., 09123456789" required>
+          </div>
+
+          <!-- Date -->
+          <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" name="date" class="form-control" required>
+          </div>
+
+          <!-- Time -->
+          <div class="mb-3">
+            <label class="form-label">Time</label>
+            <input type="time" name="time" class="form-control" required>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center">
+            <button type="submit" class="btn btn-inasal-green px-5 py-2">Submit Order</button>
+          </div>
+
+        </form>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
 
