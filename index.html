@@ -525,9 +525,25 @@
     }
   });
 </script>
+<script>
+  const selectedDishes = new Set();
 
+  document.querySelectorAll('.menu-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const dishName = card.innerText.replace(/\s*₱20.00\s*/, ''); // remove price
 
+      if (selectedDishes.has(dishName)) {
+        selectedDishes.delete(dishName);
+        card.classList.remove('selected');
+      } else {
+        selectedDishes.add(dishName);
+        card.classList.add('selected');
+      }
 
-
-    </body>
+      // Optional: update hidden input
+      document.getElementById('dishesInput').value = [...selectedDishes].join(', ');
+    });
+  });
+</script>
+   </body>
     </html>
