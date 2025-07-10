@@ -15,7 +15,6 @@ a {
   text-decoration: none;
   transition: 0.3s ease;
 }
-
 a:hover {
   color: #1b5e20;
 }
@@ -37,12 +36,22 @@ a:hover {
   color: #000;
 }
 
+/* Green Button */
+.btn-inasal-green {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+}
+.btn-inasal-green:hover {
+  background-color: #27632a;
+  color: white;
+}
+
 /* Navbar */
 .navbar-brand {
   font-size: 1.5rem;
   letter-spacing: 1px;
 }
-
 .nav-link {
   margin: 0 10px;
   font-weight: 500;
@@ -64,6 +73,9 @@ a:hover {
 
 /* Hero */
 #hero {
+  background-size: cover;
+  background-position: center;
+  min-height: 60vh;
   background-color: #f1f8e9;
   padding-top: 5rem;
   padding-bottom: 5rem;
@@ -101,6 +113,44 @@ a:hover {
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Menu Card */
+.menu-card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+.menu-card:hover {
+  background-color: #f0fff4;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+.menu-price {
+  color: #198754;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.menu-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #198754;
+  margin-bottom: 40px;
+}
+.section-separator {
+  height: 3px;
+  background: #198754;
+  width: 80px;
+  margin: 0 auto 40px;
+  border-radius: 50px;
 }
 
 /* Testimonials */
@@ -161,11 +211,13 @@ footer a:hover {
 }
 
 /* Form */
-form input, form textarea {
+form input,
+form textarea {
   border-radius: 6px;
   border: 1px solid #c8e6c9;
 }
-form input:focus, form textarea:focus {
+form input:focus,
+form textarea:focus {
   border-color: #66bb6a;
   box-shadow: 0 0 0 0.2rem rgba(102, 187, 106, 0.25);
 }
@@ -179,20 +231,14 @@ form input:focus, form textarea:focus {
   opacity: 1;
 }
 
+/* Neon Borders */
 .neon-border-green {
-  color: inherit; /* Keep existing text color */
-  text-shadow:
-    0 0 2px #39ff14,
-    0 0 4px #39ff14,
-    0 0 6px #39ff14;
+  color: inherit;
+  text-shadow: 0 0 2px #39ff14, 0 0 4px #39ff14, 0 0 6px #39ff14;
 }
-
 .neon-border-white {
-  color: inherit; /* Keep text white */
-  text-shadow:
-    0 0 2px #fff,
-    0 0 4px #0ff,
-    0 0 6px #0ff;
+  color: inherit;
+  text-shadow: 0 0 2px #fff, 0 0 4px #0ff, 0 0 6px #0ff;
 }
 
 /* Responsive Fixes */
@@ -207,7 +253,13 @@ form input:focus, form textarea:focus {
   #hero::before {
     background-size: 150px;
   }
+  #hero {
+    height: auto;
+    padding: 60px 15px;
+    text-align: center;
+  }
 }
+
 /* Ticker container */
 .sliding-banner {
   width: 100%;
@@ -226,10 +278,7 @@ form input:focus, form textarea:focus {
   font-size: 1.2rem;
   font-weight: bold;
   color: #39ff14;
-  text-shadow:
-    0 0 5px #39ff14,
-    0 0 10px #39ff14,
-    0 0 20px #39ff14;
+  text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14;
   animation: slide-left 20s linear infinite, float-glow 3s ease-in-out infinite alternate;
 }
 
@@ -245,85 +294,10 @@ form input:focus, form textarea:focus {
 
 /* Extra glow bounce */
 @keyframes float-glow {
-  0% {
-    text-shadow:
-      0 0 5px #39ff14,
-      0 0 10px #39ff14,
-      0 0 20px #39ff14;
+  0%, 100% {
+    text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14;
   }
   50% {
-    text-shadow:
-      0 0 10px #39ff14,
-      0 0 20px #39ff14,
-      0 0 30px #39ff14;
-  }
-  100% {
-    text-shadow:
-      0 0 5px #39ff14,
-      0 0 10px #39ff14,
-      0 0 20px #39ff14;
+    text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
   }
 }
-.btn-inasal-green {
-  background-color: #2e7d32;
-  color: #fff;
-  border: none;
-}
-
-.btn-inasal-green:hover {
-  background-color: #1b5e20;
-  color: #fff;
-}
-.btn-inasal-green {
-  background-color: #2e7d32;
-  color: white;
-  border: none;
-}
-.btn-inasal-green:hover {
-  background-color: #27632a;
-  color: white;
-  <style>
-<style>
-  .menu-card {
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: left;
-    font-weight: 500;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s ease;
-  }
-
-  .menu-card:hover {
-    background-color: #f0fff4;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-  }
-
-  .menu-price {
-    color: #198754;
-    font-weight: bold;
-    white-space: nowrap;
-  }
-
-  .menu-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #198754;
-    margin-bottom: 40px;
-  }
-
-  .section-separator {
-    height: 3px;
-    background: #198754;
-    width: 80px;
-    margin: 0 auto 40px;
-    border-radius: 50px;
-  }
-</style>
-
-
