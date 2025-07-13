@@ -45,43 +45,47 @@
   <div class="thank-you-box">
     <h1>Thank You!</h1>
     <p id="message">Verifying your payment...</p>
-    <p class="loader" id="loader">Please wait while we confirm your order status.</p>
+    <p class="loader" id="loader">
+      <span class="spinner-border spinner-border-sm text-success" role="status" aria-hidden="true"></span>
+      Please wait while we confirm your order status.
+    </p>
     <a href="index.html" class="btn btn-success mt-4" style="display:none;" id="backBtn">← Back to Home</a>
   </div>
 
   <script>
-  const params = new URLSearchParams(window.location.search);
-  const sessionId = params.get('checkout_session_id'); // This matches your success_url key
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('checkout_session_id'); // This matches your success_url key
 
-  const messageEl = document.getElementById('message');
-  const loaderEl = document.getElementById('loader');
-  const backBtn = document.getElementById('backBtn');
+    const messageEl = document.getElementById('message');
+    const loaderEl = document.getElementById('loader');
+    const backBtn = document.getElementById('backBtn');
 
-  if (sessionId) {
-    fetch(`https://jerry-inasal.onrender.com/verify-payment?sessionId=${sessionId}`)
-      .then(resp => resp.json())
-      .then(data => {
-        console.log('✅ Payment verification result:', data);
-        if (data.status === 'paid') {
-          messageEl.textContent = "Payment confirmed! 🎉";
-        } else {
-          messageEl.textContent = "Payment not completed yet. Contact support if needed.";
-        }
-      })
-      .catch(err => {
-        console.error('❌ Verification error:', err);
-        messageEl.textContent = "Error verifying payment. Please try again later.";
-      })
-      .finally(() => {
-        loaderEl.style.display = 'none';
-        backBtn.style.display = 'inline-block';
-      });
-  } else {
-    messageEl.textContent = "No session ID found in URL.";
-    loaderEl.style.display = 'none';
-    backBtn.style.display = 'inline-block';
-  }
-</script>
-
+    if (sessionId) {
+      fetch(`https://jerry-inasal.onrender.com/verify-payment?sessionId=${sessionId}`)
+        .then(resp => resp.json())
+        .then(data => {
+          console.log('✅ Payment verification result:', data);
+          if (data.status === 'paid') {
+            messageEl.textContent = "✅ Payment confirmed! Your order is on the way!";
+          } else if (data.status === 'Confirmed') {
+            messageEl.textContent = "✅ Your payment was already confirmed earlier!";
+          } else {
+            messageEl.textContent = "⚠️ Payment not completed yet. Please contact support if needed.";
+          }
+        })
+        .catch(err => {
+          console.error('❌ Verification error:', err);
+          messageEl.textContent = "❌ Error verifying payment. Please try again later.";
+        })
+        .finally(() => {
+          loaderEl.style.display = 'none';
+          backBtn.style.display = 'inline-block';
+        });
+    } else {
+      messageEl.textContent = "❌ No session ID found in URL.";
+      loaderEl.style.display = 'none';
+      backBtn.style.display = 'inline-block';
+    }
+  </script>
 </body>
 </html>
