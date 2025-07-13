@@ -54,23 +54,23 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const sessionId = params.get('checkout_session_id'); // This matches your success_url key
+    const sessionId = params.get('checkout_session_id');
 
     const messageEl = document.getElementById('message');
     const loaderEl = document.getElementById('loader');
     const backBtn = document.getElementById('backBtn');
 
-    if (sessionId) {
-      fetch(`https://jerry-inasal.onrender.com/verify-payment?sessionId=${sessionId}`)
+    if (sessionId && sessionId !== '{CHECKOUT_SESSION_ID}') {
+      fetch(`https://jerrys-inasal.onrender.com/verify-payment?sessionId=${sessionId}`)
         .then(resp => resp.json())
         .then(data => {
           console.log('✅ Payment verification result:', data);
           if (data.status === 'paid') {
             messageEl.textContent = "✅ Payment confirmed! Your order is on the way!";
           } else if (data.status === 'Confirmed') {
-            messageEl.textContent = "✅ Your payment was already confirmed earlier!";
+            messageEl.textContent = "✅ Your payment was already confirmed!";
           } else {
-            messageEl.textContent = "⚠️ Payment not completed yet. Please contact support if needed.";
+            messageEl.textContent = "⚠️ Payment not completed. Please contact support if needed.";
           }
         })
         .catch(err => {
@@ -82,7 +82,7 @@
           backBtn.style.display = 'inline-block';
         });
     } else {
-      messageEl.textContent = "❌ No session ID found in URL.";
+      messageEl.textContent = "❌ No valid session ID found in URL.";
       loaderEl.style.display = 'none';
       backBtn.style.display = 'inline-block';
     }
