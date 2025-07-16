@@ -122,13 +122,22 @@
         </div>
       </section>
 
-<!-- Booking Form Section -->
-<section class="py-5 bg-white" id="cateringModal">
-  <div class="container">
-    <h2 class="text-center text-inasal-green mb-4">Book Our Catering Services</h2>
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <form onsubmit="sendmail(event)">
+     
+      <button type="button" class="btn btn-inasal-green" data-bs-toggle="modal" data-bs-target="#cateringModal">
+  Book Catering
+</button>
+
+<!-- Catering Booking Modal -->
+<div class="modal fade" id="cateringModal" tabindex="-1" aria-labelledby="cateringModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cateringModalLabel">Catering Bookings</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Booking Form -->
+        <form id="bookingForm" onsubmit="sendmail(event)">
           <div class="mb-3">
             <label for="name" class="form-label">Your Name</label>
             <input type="text" class="form-control" id="name" required>
@@ -143,7 +152,7 @@
           </div>
           <div class="mb-3">
             <label for="message" class="form-label">Message</label>
-            <textarea class="form-control" id="message" rows="10" required></textarea>
+            <textarea class="form-control" id="message" rows="5" required></textarea>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-inasal-green">Submit Booking</button>
@@ -152,64 +161,13 @@
       </div>
     </div>
   </div>
-</section>
-
-<!-- Footer -->
-<footer class="bg-white text-dark py-3 border-top">
-  <div class="container text-center">
-    <p class="mb-0">&copy; 2025 Jerry's Inasal. All rights reserved.</p>
-    <div class="social-icons mt-2">
-      <a href="https://www.facebook.com/JerrysInasal" target="_blank" class="fab fa-facebook-f text-dark me-3"></a>
-      <a href="tel:+639198732936" class="fas fa-phone-alt text-dark"></a>
-    </div>
-  </div>
-</footer>
-
-<!-- EmailJS Library -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<!-- Booking Form Script -->
+</div>
 <script>
-  function sendmail(event) {
-    event.preventDefault();
-
-    const form = event.target;
-    const name = form.querySelector('#name').value;
-    const email = form.querySelector('#email').value;
-    const subject = form.querySelector('#subject').value; // Still called 'subject'
-    const message = form.querySelector('#message').value;
-
-    const params = { name, email, subject, message };
-
-    emailjs.send("service_0zhgt8h", "template_lp1bk3r", params)
-      .then((response) => {
-        console.log("Main email sent!", response.status, response.text);
-        return emailjs.send("service_0zhgt8h", "template_l9aahza", params);
-      })
-      .then((replyResponse) => {
-        console.log("Auto-reply sent!", replyResponse.status, replyResponse.text);
-        alert("Your booking has been submitted! We'll reply to you shortly.");
-        form.reset();
-        document.getElementById("message").value =
-`Address: 
-Time: 
-Date: 
-Buffet theme: 
-Menu: 
-Dessert: 
-Rate: 
-Add-on: (e.g., Table & Chairs):
-Request: (e.g., extra table, extra cloth):`;
-      })
-      .catch((error) => {
-        console.error("Email sending failed:", error);
-        alert("Something went wrong. Please try again later.");
-      });
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
-    const messageBox = document.getElementById("message");
-    if (messageBox) {
-      messageBox.value =
+    // Initialize default message template
+    const msgBox = document.getElementById("message");
+    if (msgBox) {
+      msgBox.value =
 `Address: 
 Time: 
 Date: 
@@ -220,13 +178,25 @@ Rate:
 Add-on: (e.g., Table & Chairs):
 Request: (e.g., extra table, extra cloth):`;
     }
+
+    // Prevent backdrop-error: no need to manually create Modal instances here
   });
 
-  // Set default message on page load
-  document.addEventListener("DOMContentLoaded", function () {
-    const messageBox = document.getElementById("message");
-    messageBox.value =
-`Address: 
+  function sendmail(event) {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const subject = form.subject.value;  // Contact number as 'subject'
+    const message = form.message.value;
+    const params = { name, email, subject, message };
+
+    emailjs.send("service_0zhgt8h", "template_lp1bk3r", params)
+      .then(() => emailjs.send("service_0zhgt8h", "template_l9aahza", params))
+      .then(() => {
+        alert("Booking submitted! We'll reply soon.");
+        form.reset();
+        if (msgBox) msgBox.value = `Address: 
 Time: 
 Date: 
 Buffet theme: 
@@ -235,8 +205,15 @@ Dessert:
 Rate: 
 Add-on: (e.g., Table & Chairs):
 Request: (e.g., extra table, extra cloth):`;
-  });
+        const modalEl = document.getElementById('cateringModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();  // close the modal after submission
+      })
+      .catch(() => alert("Error sending email. Please try again."));
+  }
 </script>
+
+
 
 
       <!-- PARTY TRAY MODAL -->
