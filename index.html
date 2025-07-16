@@ -122,8 +122,8 @@
         </div>
       </section>
 
-<!-- Booking Form -->
-<section class="py-5 bg-white" id="#cateringModal">
+<!-- Booking Form Section -->
+<section class="py-5 bg-white" id="cateringModal">
   <div class="container">
     <h2 class="text-center text-inasal-green mb-4">Book Our Catering Services</h2>
     <div class="row justify-content-center">
@@ -159,7 +159,7 @@
   <div class="container text-center">
     <p class="mb-0">&copy; 2025 Jerry's Inasal. All rights reserved.</p>
     <div class="social-icons mt-2">
-      <a href="https://www.facebook.com/ZackiesRestaurant" target="_blank" class="fab fa-facebook-f text-dark me-3"></a>
+      <a href="https://www.facebook.com/JerrysInasal" target="_blank" class="fab fa-facebook-f text-dark me-3"></a>
       <a href="tel:+639198732936" class="fas fa-phone-alt text-dark"></a>
     </div>
   </div>
@@ -167,39 +167,28 @@
 
 <!-- EmailJS Library -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<!-- Initialize EmailJS -->
-<script>
-  (function() {
-    emailjs.init("SzVEoJYFD3IRfWoj7"); // Your actual EmailJS public key
-  })();
-</script>
-
-<!-- Script to handle booking email -->
+<!-- Booking Form Script -->
 <script>
   function sendmail(event) {
-    event.preventDefault(); // Prevent page reload
+    event.preventDefault();
 
     const form = event.target;
-
-    const name = form.querySelector('input[id$="name"]').value;
-    const email = form.querySelector('input[id$="email"]').value;
-    const subject = form.querySelector('input[id$="subject"]').value; // Still called 'subject' in JS
-    const message = form.querySelector('textarea[id$="message"]').value;
+    const name = form.querySelector('#name').value;
+    const email = form.querySelector('#email').value;
+    const subject = form.querySelector('#subject').value; // Still called 'subject'
+    const message = form.querySelector('#message').value;
 
     const params = { name, email, subject, message };
 
-    // Send to business email
     emailjs.send("service_0zhgt8h", "template_lp1bk3r", params)
       .then((response) => {
         console.log("Main email sent!", response.status, response.text);
-        return emailjs.send("service_0zhgt8h", "template_l9aahza", params); // Auto-reply
+        return emailjs.send("service_0zhgt8h", "template_l9aahza", params);
       })
       .then((replyResponse) => {
         console.log("Auto-reply sent!", replyResponse.status, replyResponse.text);
         alert("Your booking has been submitted! We'll reply to you shortly.");
-        form.reset(); // Clear the form
-        // Re-insert the message template
+        form.reset();
         document.getElementById("message").value =
 `Address: 
 Time: 
@@ -212,10 +201,26 @@ Add-on: (e.g., Table & Chairs):
 Request: (e.g., extra table, extra cloth):`;
       })
       .catch((error) => {
-        console.error("Error sending email(s):", error);
-        alert("Oops! Something went wrong. Please try again later.");
+        console.error("Email sending failed:", error);
+        alert("Something went wrong. Please try again later.");
       });
   }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const messageBox = document.getElementById("message");
+    if (messageBox) {
+      messageBox.value =
+`Address: 
+Time: 
+Date: 
+Buffet theme: 
+Menu: 
+Dessert: 
+Rate: 
+Add-on: (e.g., Table & Chairs):
+Request: (e.g., extra table, extra cloth):`;
+    }
+  });
 
   // Set default message on page load
   document.addEventListener("DOMContentLoaded", function () {
