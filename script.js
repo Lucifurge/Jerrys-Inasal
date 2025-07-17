@@ -11,11 +11,11 @@ function sendmail(event) {
   const params = { name, email, subject, message };
 
   // Send booking details to business email
-  emailjs.send("service_0zhgt8h", "template_lp1bk3r", params)
+  emailjs.send("service_0zhgt8h", "template_l9aahza", params)
     .then((response) => {
       console.log("Main email sent!", response.status, response.text);
       // Send auto-reply to the customer
-      return emailjs.send("service_0zhgt8h", "template_l9aahza", params);
+      return emailjs.send("service_0zhgt8h", "template_lp1bk3r", params);
     })
     .then((replyResponse) => {
       console.log("Auto-reply sent!", replyResponse.status, replyResponse.text);
