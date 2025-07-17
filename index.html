@@ -162,12 +162,34 @@
     </div>
   </div>
 </div>
+<!-- Booking Form Script -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Initialize default message template
-    const msgBox = document.getElementById("message");
-    if (msgBox) {
-      msgBox.value =
+  function sendmail(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const name = form.querySelector('input[id$="name"]').value;
+    const email = form.querySelector('input[id$="email"]').value;
+    const subject = form.querySelector('input[id$="subject"]').value;
+    const message = form.querySelector('textarea[id$="message"]').value;
+
+    const businessParams = { name, email, subject, message };
+    const autoReplyParams = { to_name: name, to_email: email };
+
+    // Send email to Jerry Inasal
+    emailjs.send("service_0zhgt8h", "template_lp1bk3r", businessParams)
+      .then((response) => {
+        console.log("Main email sent to Jerry!", response.status, response.text);
+
+        // Send auto-reply to customer
+        return emailjs.send("service_0zhgt8h", "template_l9aahza", autoReplyParams);
+      })
+      .then((replyResponse) => {
+        console.log("Auto-reply sent to customer!", replyResponse.status, replyResponse.text);
+        alert("Your booking has been submitted! We'll reply to you shortly.");
+        form.reset();
+
+        document.getElementById("message").value =
 `Address: 
 Time: 
 Date: 
@@ -177,26 +199,17 @@ Dessert:
 Rate: 
 Add-on: (e.g., Table & Chairs):
 Request: (e.g., extra table, extra cloth):`;
-    }
+      })
+      .catch((error) => {
+        console.error("Email sending error:", error);
+        alert("Oops! Something went wrong. Please try again later.");
+      });
+  }
 
-    // Prevent backdrop-error: no need to manually create Modal instances here
-  });
-
-  function sendmail(event) {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const subject = form.subject.value;  // Contact number as 'subject'
-    const message = form.message.value;
-    const params = { name, email, subject, message };
-
-    emailjs.send("service_0zhgt8h", "template_lp1bk3r", params)
-      .then(() => emailjs.send("service_0zhgt8h", "template_l9aahza", params))
-      .then(() => {
-        alert("Booking submitted! We'll reply soon.");
-        form.reset();
-        if (msgBox) msgBox.value = `Address: 
+  // Set default message on page load
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("message").value =
+`Address: 
 Time: 
 Date: 
 Buffet theme: 
@@ -205,14 +218,8 @@ Dessert:
 Rate: 
 Add-on: (e.g., Table & Chairs):
 Request: (e.g., extra table, extra cloth):`;
-        const modalEl = document.getElementById('cateringModal');
-        const modal = bootstrap.Modal.getInstance(modalEl);
-        if (modal) modal.hide();  // close the modal after submission
-      })
-      .catch(() => alert("Error sending email. Please try again."));
-  }
+  });
 </script>
-
 
 
 
@@ -503,7 +510,7 @@ Request: (e.g., extra table, extra cloth):`;
         }
       });
       </script>
-      <script src="script.js"></script>
+      
 <script>
   const selectedDishes = [];
   const selectedDishesInput = document.getElementById('selectedDishesInput');
